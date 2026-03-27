@@ -24,6 +24,7 @@ const navItems = [
     section: 'Finance',
     items: [
       { path: '/loyers',    label: 'Loyers',     icon: CreditCard },
+      { path: '/contrats',  label: 'Contrats',   icon: FileText },
       { path: '/documents', label: 'Documents',  icon: FileText },
     ]
   },

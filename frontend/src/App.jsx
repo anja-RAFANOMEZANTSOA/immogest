@@ -13,6 +13,7 @@ import Locataires  from './pages/Locataires'
 import Loyers      from './pages/Loyers'
 import Maintenance from './pages/Maintenance'
 import Documents   from './pages/Documents'
+import Contrats from './pages/Contrats'
 
 // Espace locataire
 import EspaceLocataire from './pages/EspaceLocataire'
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/dashboard"   element={<Dashboard />} />
             <Route path="/biens"       element={<Biens />} />
             <Route path="/locataires"  element={<Locataires />} />
+            <Route path="/contrats" element={<Contrats />} />
             <Route path="/loyers"      element={<Loyers />} />
             <Route path="/maintenance" element={<Maintenance />} />
             <Route path="/documents"   element={<Documents />} />
