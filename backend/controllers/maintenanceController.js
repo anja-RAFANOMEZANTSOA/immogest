@@ -6,14 +6,14 @@ const getMaintenance = async (req, res) => {
 
     if (req.user.role === 'proprietaire') {
       query = `
-        SELECT m.*, b.titre AS bien_titre,
-               u.nom, u.prenom
-        FROM maintenance m
-        JOIN biens b ON m.bien_id = b.id
-        JOIN locataires l ON m.locataire_id = l.id
-        JOIN utilisateurs u ON l.utilisateur_id = u.id
-        WHERE b.proprietaire_id = ?
-        ORDER BY m.date_creation DESC`;
+  SELECT m.*, b.titre AS bien_titre,
+         u.nom, u.prenom
+  FROM maintenance m
+  JOIN biens b ON m.bien_id = b.id
+  LEFT JOIN locataires l ON m.locataire_id = l.id
+  LEFT JOIN utilisateurs u ON l.utilisateur_id = u.id
+  WHERE b.proprietaire_id = ?
+  ORDER BY m.date_creation DESC`;
       params = [req.user.id];
     } else {
       query = `
@@ -33,31 +33,32 @@ const getMaintenance = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur.', error: error.message });
   }
 };
-
 const createMaintenance = async (req, res) => {
   try {
-    const { bien_id, titre, description, priorite } = req.body;
-
+    const { bien_id, titre, description, priorite, locataire_id } = req.body;
     if (!bien_id || !titre) {
       return res.status(400).json({ message: 'Champs obligatoires manquants.' });
     }
 
-    const [locataire] = await db.query(
-      'SELECT id FROM locataires WHERE utilisateur_id = ?',
-      [req.user.id]
-    );
-    if (locataire.length === 0) {
-      return res.status(403).json({ message: 'Profil locataire non trouvé.' });
+    let locataireId = locataire_id || null;
+
+    if (req.user.role === 'locataire') {
+      const [locataire] = await db.query(
+        'SELECT id FROM locataires WHERE utilisateur_id = ?',
+        [req.user.id]
+      );
+      if (locataire.length === 0) {
+        return res.status(403).json({ message: 'Profil locataire non trouvé.' });
+      }
+      locataireId = locataire[0].id;
     }
 
     const [result] = await db.query(
       `INSERT INTO maintenance
         (bien_id, locataire_id, titre, description, priorite, statut)
        VALUES (?, ?, ?, ?, ?, 'en_attente')`,
-      [bien_id, locataire[0].id, titre,
-       description || null, priorite || 'moyenne']
+      [bien_id, locataireId, titre, description || null, priorite || 'moyenne']
     );
-
     res.status(201).json({
       message: 'Demande envoyée avec succès !',
       maintenanceId: result.insertId
