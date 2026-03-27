@@ -2,16 +2,12 @@ const db = require('../config/db');
 
 const getLocataires = async (req, res) => {
   try {
-    const [locataires] = await db.query(
-      `SELECT l.*, u.nom, u.prenom, u.email, u.telephone
-       FROM locataires l
-       JOIN utilisateurs u ON l.utilisateur_id = u.id
-       JOIN contrats c ON c.locataire_id = l.id
-       JOIN biens b ON b.id = c.bien_id
-       WHERE b.proprietaire_id = ?
-       GROUP BY l.id
-       ORDER BY u.nom ASC`,
-      [req.user.id]
+const [locataires] = await db.query(
+  `SELECT l.*, u.nom, u.prenom, u.email, u.telephone
+   FROM locataires l
+   JOIN utilisateurs u ON l.utilisateur_id = u.id
+   ORDER BY u.nom ASC`
+);
     );
     res.json(locataires);
   } catch (error) {
