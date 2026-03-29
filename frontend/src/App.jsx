@@ -5,7 +5,7 @@ import PrivateRoute from './components/PrivateRoute'
 // Pages publiques
 import Login    from './pages/Login'
 import Register from './pages/Register'
-
+import Home from './pages/Home'
 // Pages propriétaire
 import Dashboard   from './pages/Dashboard'
 import Biens       from './pages/Biens'
@@ -27,7 +27,7 @@ export default function App() {
           {/* Pages publiques — accessibles sans connexion */}
           <Route path="/login"    element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+<Route path="/" element={<Home />} />
           {/* Pages propriétaire — connexion obligatoire */}
           <Route element={<PrivateRoute allowedRoles={['proprietaire', 'admin']} />}>
             <Route path="/dashboard"   element={<Dashboard />} />
