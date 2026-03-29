@@ -54,8 +54,8 @@ export default function Login() {
           <span className="auth-brand-name">ImmoGest</span>
         </div>
         <h2 className="auth-left-title">
-          Gérez votre patrimoine immobilier en toute simplicité
-        </h2>
+  Gérez votre patrimoine <span>immobilier</span> en toute simplicité
+</h2>
         <p className="auth-left-sub">
           ImmoGest centralise vos biens, locataires et finances
           en une seule plateforme moderne et sécurisée.
@@ -67,6 +67,20 @@ export default function Login() {
           <li>Tableau de bord financier avec graphiques</li>
           <li>Espace sécurisé pour les locataires</li>
         </ul>
+        <div className="auth-stats">
+  <div className="auth-stat">
+    <span className="auth-stat-value">500+</span>
+    <span className="auth-stat-label">Biens gérés</span>
+  </div>
+  <div className="auth-stat">
+    <span className="auth-stat-value">98%</span>
+    <span className="auth-stat-label">Satisfaction</span>
+  </div>
+  <div className="auth-stat">
+    <span className="auth-stat-value">24/7</span>
+    <span className="auth-stat-label">Disponible</span>
+  </div>
+</div>
       </div>
 
       {/* Panneau droit — formulaire */}
