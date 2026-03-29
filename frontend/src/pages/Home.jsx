@@ -1,683 +1,232 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-.home-page {
-  font-family: 'Inter', sans-serif;
-  color: #0F172A;
-  overflow-x: hidden;
-}
-
-/* ── NAVBAR ── */
-.home-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 0 5%;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-  transition: all 0.3s ease;
-}
-
-.home-nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.home-nav-logo-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  color: #0F172A;
-  letter-spacing: -0.03em;
-}
-
-.home-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.home-nav-link {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: #475569;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.home-nav-link:hover { color: #2563EB; }
-
-.home-nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.btn-nav-login {
-  padding: 9px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0F172A;
-  background: transparent;
-  border: 2px solid #E2E8F0;
-  border-radius: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-}
-
-.btn-nav-login:hover {
-  border-color: #2563EB;
-  color: #2563EB;
-}
-
-.btn-nav-cta {
-  padding: 10px 22px;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #2563EB, #6366F1);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
-}
-
-.btn-nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37,99,235,0.45);
-}
-
-/* ── HERO ── */
-.home-hero {
-  min-height: 100vh;
-  background: linear-gradient(160deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 120px 5% 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.home-hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-}
-
-.home-hero-glow1 {
-  position: absolute;
-  top: -150px; left: 50%;
-  transform: translateX(-50%);
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.home-hero-glow2 {
-  position: absolute;
-  bottom: -100px; right: -100px;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.home-hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(129,140,248,0.3);
-  color: #C7D2FE;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 100px;
-  margin-bottom: 28px;
-  position: relative;
-  z-index: 1;
-}
-
-.home-hero-badge-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #818CF8;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
-}
-
-.home-hero-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(38px, 6vw, 68px);
-  font-weight: 900;
-  color: white;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  margin-bottom: 24px;
-  max-width: 800px;
-  position: relative;
-  z-index: 1;
-}
-
-.home-hero-title span {
-  background: linear-gradient(90deg, #93C5FD, #A5B4FC, #C084FC);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.home-hero-sub {
-  font-size: 18px;
-  color: rgba(255,255,255,0.62);
-  line-height: 1.7;
-  max-width: 560px;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 1;
-}
-
-.home-hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 60px;
-  position: relative;
-  z-index: 1;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.btn-hero-primary {
-  padding: 15px 32px;
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-  background: linear-gradient(135deg, #2563EB, #6366F1);
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 8px 28px rgba(37,99,235,0.45);
-  transition: all 0.25s;
-}
-
-.btn-hero-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(37,99,235,0.55);
-}
-
-.btn-hero-secondary {
-  padding: 15px 32px;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  backdrop-filter: blur(10px);
-  transition: all 0.25s;
-}
-
-.btn-hero-secondary:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.35);
-}
-
-.home-hero-stats {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  position: relative;
-  z-index: 1;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.home-hero-stat {
-  text-align: center;
-}
-
-.home-hero-stat-value {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 32px;
-  font-weight: 900;
-  color: white;
-  letter-spacing: -0.03em;
-  display: block;
-}
-
-.home-hero-stat-label {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-}
-
-.home-hero-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(255,255,255,0.15);
-}
-
-/* ── FEATURES ── */
-.home-features {
-  padding: 100px 5%;
-  background: #F8FAFC;
-}
-
-.home-section-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
-  color: #2563EB;
-  font-size: 12.5px;
-  font-weight: 700;
-  padding: 7px 16px;
-  border-radius: 100px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.home-section-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  color: #0F172A;
-  letter-spacing: -0.03em;
-  margin-bottom: 14px;
-  line-height: 1.2;
-}
-
-.home-section-sub {
-  font-size: 16px;
-  color: #64748B;
-  line-height: 1.7;
-  max-width: 560px;
-  margin-bottom: 56px;
-}
-
-.home-features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.home-feature-card {
-  background: white;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
-  padding: 32px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.home-feature-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #2563EB, #6366F1);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.home-feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.08);
-  border-color: transparent;
-}
-
-.home-feature-card:hover::before { opacity: 1; }
-
-.home-feature-icon {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.home-feature-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: #0F172A;
-  margin-bottom: 10px;
-  letter-spacing: -0.02em;
-}
-
-.home-feature-desc {
-  font-size: 14px;
-  color: #64748B;
-  line-height: 1.65;
-}
-
-/* ── HOW IT WORKS ── */
-.home-how {
-  padding: 100px 5%;
-  background: white;
-  text-align: center;
-}
-
-.home-steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 32px;
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.home-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-.home-step-number {
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #2563EB, #6366F1);
-  color: white;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 24px rgba(37,99,235,0.35);
-}
-
-.home-step-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0F172A;
-}
-
-.home-step-desc {
-  font-size: 13.5px;
-  color: #64748B;
-  line-height: 1.6;
-  text-align: center;
-}
-
-/* ── TESTIMONIALS ── */
-.home-testimonials {
-  padding: 100px 5%;
-  background: linear-gradient(160deg, #0F172A 0%, #1E3A5F 100%);
-  text-align: center;
-}
-
-.home-testimonials .home-section-title { color: white; }
-.home-testimonials .home-section-sub { color: rgba(255,255,255,0.55); margin: 0 auto 56px; }
-.home-testimonials .home-section-badge {
-  background: rgba(99,102,241,0.2);
-  border-color: rgba(129,140,248,0.3);
-  color: #C7D2FE;
-}
-
-.home-testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.home-testimonial-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 20px;
-  padding: 28px;
-  text-align: left;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
-
-.home-testimonial-card:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-3px);
-}
-
-.home-testimonial-stars {
-  color: #FBBF24;
-  font-size: 16px;
-  margin-bottom: 14px;
-  letter-spacing: 2px;
-}
-
-.home-testimonial-text {
-  font-size: 14px;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.7;
-  font-style: italic;
-  margin-bottom: 18px;
-}
-
-.home-testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.home-testimonial-avatar {
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #2563EB, #6366F1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: white;
-  flex-shrink: 0;
-}
-
-.home-testimonial-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-}
-
-.home-testimonial-role {
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-}
-
-/* ── CTA ── */
-.home-cta {
-  padding: 100px 5%;
-  background: #F8FAFC;
-  text-align: center;
-}
-
-.home-cta-box {
-  max-width: 700px;
-  margin: 0 auto;
-  background: linear-gradient(135deg, #1E3A5F, #0F172A);
-  border-radius: 28px;
-  padding: 64px 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.home-cta-box::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 280px; height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.home-cta-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(26px, 4vw, 38px);
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.03em;
-  margin-bottom: 14px;
-  line-height: 1.2;
-  position: relative;
-  z-index: 1;
-}
-
-.home-cta-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 36px;
-  line-height: 1.6;
-  position: relative;
-  z-index: 1;
-}
-
-.home-cta-actions {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 1;
-}
-
-/* ── FOOTER ── */
-.home-footer {
-  padding: 48px 5% 32px;
-  background: #0F172A;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.home-footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-
-.home-footer-brand-name {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.03em;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-.home-footer-brand-desc {
-  font-size: 13.5px;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.6;
-  max-width: 260px;
-}
-
-.home-footer-links-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 16px;
-}
-
-.home-footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.home-footer-link {
-  font-size: 14px;
-  color: rgba(255,255,255,0.45);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.home-footer-link:hover { color: white; }
-
-.home-footer-bottom {
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.home-footer-copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
-}
-
-.home-footer-badges {
-  display: flex;
-  gap: 12px;
-}
-
-.home-footer-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.35);
-  font-weight: 500;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .home-nav-links { display: none; }
-  .home-hero-title { font-size: 36px; }
-  .home-hero-sub { font-size: 16px; }
-  .home-hero-divider { display: none; }
-  .home-cta-box { padding: 40px 24px; }
-  .home-footer-top { flex-direction: column; }
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import './Home.css'
+
+const LogoIcon = ({ size = 36 }) => (
+  <svg width={size} height={size} viewBox="0 0 36 36" fill="none">
+    <rect width="36" height="36" rx="10" fill="url(#hLogo)"/>
+    <path d="M18 7L8 15V30H15V22H21V30H28V15L18 7Z" fill="white" fillOpacity="0.95"/>
+    <path d="M15 22H21V30H15V22Z" fill="white" fillOpacity="0.5"/>
+    <defs>
+      <linearGradient id="hLogo" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#2563EB"/>
+        <stop offset="100%" stopColor="#1E40AF"/>
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+const features = [
+  { icon: '🏠', color: '#EFF6FF', title: 'Gestion des biens', desc: 'Centralisez tous vos biens immobiliers. Ajoutez, modifiez et suivez leur statut en temps réel.' },
+  { icon: '👥', color: '#F0FDF4', title: 'Gestion des locataires', desc: 'Gérez vos locataires facilement. Accès sécurisé à leur espace personnel dédié.' },
+  { icon: '📄', color: '#FFF7ED', title: 'Contrats de bail', desc: 'Créez et gérez vos contrats de bail en ligne. Suivi des échéances automatique.' },
+  { icon: '💰', color: '#FFF1F2', title: 'Suivi des loyers', desc: 'Enregistrez les paiements, générez des quittances PDF et suivez les impayés.' },
+  { icon: '🔧', color: '#F5F3FF', title: 'Maintenance', desc: 'Recevez et gérez les demandes de maintenance en temps réel depuis votre tableau de bord.' },
+  { icon: '📊', color: '#ECFDF5', title: 'Tableau de bord', desc: "Visualisez vos revenus, taux d'occupation et performances financières en un coup d'œil." },
+]
+
+const testimonials = [
+  { stars: '★★★★★', text: "ImmoGest a révolutionné la gestion de mes 12 appartements. Je gagne 3 heures par semaine grâce à cette plateforme !", name: 'Rakoto Jean', role: 'Propriétaire, Antananarivo', initials: 'RJ' },
+  { stars: '★★★★★', text: "Enfin une solution simple et complète pour les propriétaires malgaches. Le support est réactif et l'interface est intuitive.", name: 'Nirina Andry', role: 'Investisseur immobilier', initials: 'NA' },
+  { stars: '★★★★☆', text: "La gestion des loyers et des quittances est un vrai gain de temps. Je recommande ImmoGest à tous les propriétaires.", name: 'Marie Rabe', role: 'Propriétaire, Toamasina', initials: 'MR' },
+]
+
+export default function Home() {
+  const navigate = useNavigate()
+  const { user, loading } = useAuth()
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/dashboard')
+    }
+  }, [user, loading, navigate])
+
+  if (loading) return null
+
+  return (
+    <div className="home-page">
+
+      {/* NAVBAR */}
+      <nav className="home-nav">
+        <Link to="/" className="home-nav-logo">
+          <LogoIcon size={36} />
+          <span className="home-nav-logo-text">ImmoGest</span>
+        </Link>
+        <div className="home-nav-links">
+          <a href="#features" className="home-nav-link">Fonctionnalités</a>
+          <a href="#how" className="home-nav-link">Comment ça marche</a>
+          <a href="#testimonials" className="home-nav-link">Témoignages</a>
+        </div>
+        <div className="home-nav-actions">
+          <Link to="/login" className="btn-nav-login">Se connecter</Link>
+          <Link to="/register" className="btn-nav-cta">Essai gratuit →</Link>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section className="home-hero">
+        <div className="home-hero-grid" />
+        <div className="home-hero-glow1" />
+        <div className="home-hero-glow2" />
+        <div className="home-hero-badge">
+          <span className="home-hero-badge-dot" />
+          Plateforme de gestion immobilière #1
+        </div>
+        <h1 className="home-hero-title">
+          Gérez votre patrimoine<br/>
+          <span>immobilier</span> simplement
+        </h1>
+        <p className="home-hero-sub">
+          ImmoGest centralise vos biens, locataires, contrats et finances
+          en une seule plateforme moderne, sécurisée et facile à utiliser.
+        </p>
+        <div className="home-hero-actions">
+          <Link to="/register" className="btn-hero-primary">Commencer gratuitement →</Link>
+          <Link to="/login" className="btn-hero-secondary">Se connecter</Link>
+        </div>
+        <div className="home-hero-stats">
+          <div className="home-hero-stat">
+            <span className="home-hero-stat-value">500+</span>
+            <span className="home-hero-stat-label">Biens gérés</span>
+          </div>
+          <div className="home-hero-divider" />
+          <div className="home-hero-stat">
+            <span className="home-hero-stat-value">200+</span>
+            <span className="home-hero-stat-label">Propriétaires</span>
+          </div>
+          <div className="home-hero-divider" />
+          <div className="home-hero-stat">
+            <span className="home-hero-stat-value">98%</span>
+            <span className="home-hero-stat-label">Satisfaction</span>
+          </div>
+          <div className="home-hero-divider" />
+          <div className="home-hero-stat">
+            <span className="home-hero-stat-value">24/7</span>
+            <span className="home-hero-stat-label">Disponible</span>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="home-features" id="features">
+        <div className="home-section-badge">✦ Fonctionnalités</div>
+        <h2 className="home-section-title">Tout ce dont vous avez besoin</h2>
+        <p className="home-section-sub">
+          Une suite complète d'outils pour gérer votre patrimoine immobilier de A à Z, sans complexité.
+        </p>
+        <div className="home-features-grid">
+          {features.map((f, i) => (
+            <div className="home-feature-card" key={i}>
+              <div className="home-feature-icon" style={{ background: f.color }}>{f.icon}</div>
+              <div className="home-feature-title">{f.title}</div>
+              <div className="home-feature-desc">{f.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="home-how" id="how">
+        <div className="home-section-badge">✦ Comment ça marche</div>
+        <h2 className="home-section-title">Démarrez en 3 étapes</h2>
+        <p className="home-section-sub" style={{ margin: '0 auto 56px' }}>
+          Configurez votre espace de gestion en quelques minutes seulement.
+        </p>
+        <div className="home-steps">
+          <div className="home-step">
+            <div className="home-step-number">1</div>
+            <div className="home-step-title">Créez votre compte</div>
+            <p className="home-step-desc">Inscrivez-vous gratuitement en moins de 2 minutes. Aucune carte bancaire requise.</p>
+          </div>
+          <div className="home-step">
+            <div className="home-step-number">2</div>
+            <div className="home-step-title">Ajoutez vos biens</div>
+            <p className="home-step-desc">Renseignez vos propriétés, locataires et contrats facilement via notre interface intuitive.</p>
+          </div>
+          <div className="home-step">
+            <div className="home-step-number">3</div>
+            <div className="home-step-title">Gérez tout en un clic</div>
+            <p className="home-step-desc">Suivez vos loyers, maintenances et documents depuis votre tableau de bord centralisé.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="home-testimonials" id="testimonials">
+        <div className="home-section-badge">✦ Témoignages</div>
+        <h2 className="home-section-title">Ils nous font confiance</h2>
+        <p className="home-section-sub">
+          Des propriétaires satisfaits qui ont transformé leur gestion immobilière avec ImmoGest.
+        </p>
+        <div className="home-testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div className="home-testimonial-card" key={i}>
+              <div className="home-testimonial-stars">{t.stars}</div>
+              <p className="home-testimonial-text">"{t.text}"</p>
+              <div className="home-testimonial-author">
+                <div className="home-testimonial-avatar">{t.initials}</div>
+                <div>
+                  <div className="home-testimonial-name">{t.name}</div>
+                  <div className="home-testimonial-role">{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="home-cta">
+        <div className="home-cta-box">
+          <h2 className="home-cta-title">Prêt à simplifier votre gestion immobilière ?</h2>
+          <p className="home-cta-sub">
+            Rejoignez des centaines de propriétaires qui font confiance à ImmoGest. Démarrez gratuitement dès aujourd'hui.
+          </p>
+          <div className="home-cta-actions">
+            <Link to="/register" className="btn-hero-primary">Créer mon compte gratuit →</Link>
+            <Link to="/login" className="btn-hero-secondary">Se connecter</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="home-footer">
+        <div className="home-footer-top">
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <LogoIcon size={32} />
+              <div className="home-footer-brand-name">ImmoGest</div>
+            </div>
+            <p className="home-footer-brand-desc">
+              La plateforme de gestion immobilière moderne pour les propriétaires exigeants.
+            </p>
+          </div>
+          <div>
+            <div className="home-footer-links-title">Produit</div>
+            <div className="home-footer-links">
+              <a href="#features" className="home-footer-link">Fonctionnalités</a>
+              <a href="#how" className="home-footer-link">Comment ça marche</a>
+              <Link to="/register" className="home-footer-link">S'inscrire</Link>
+            </div>
+          </div>
+          <div>
+            <div className="home-footer-links-title">Accès</div>
+            <div className="home-footer-links">
+              <Link to="/login" className="home-footer-link">Connexion propriétaire</Link>
+              <Link to="/login" className="home-footer-link">Espace locataire</Link>
+            </div>
+          </div>
+        </div>
+        <div className="home-footer-bottom">
+          <span className="home-footer-copy">© 2026 ImmoGest. Tous droits réservés.</span>
+          <div className="home-footer-badges">
+            <span className="home-footer-badge">🔒 SSL Sécurisé</span>
+            <span className="home-footer-badge">⚡ Disponible 24/7</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  )
 }
