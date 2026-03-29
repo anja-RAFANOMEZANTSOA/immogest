@@ -1,21 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
-
-// Pages publiques
-import Login    from './pages/Login'
-import Register from './pages/Register'
 import Home from './pages/Home'
-// Pages propriétaire
-import Dashboard   from './pages/Dashboard'
-import Biens       from './pages/Biens'
-import Locataires  from './pages/Locataires'
-import Loyers      from './pages/Loyers'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import Biens from './pages/Biens'
+import Locataires from './pages/Locataires'
+import Loyers from './pages/Loyers'
 import Maintenance from './pages/Maintenance'
-import Documents   from './pages/Documents'
+import Documents from './pages/Documents'
 import Contrats from './pages/Contrats'
-
-// Espace locataire
 import EspaceLocataire from './pages/EspaceLocataire'
 
 export default function App() {
@@ -23,31 +18,31 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          {/* Landing page */}
+          <Route path="/" element={<Home />} />
 
-          {/* Pages publiques — accessibles sans connexion */}
-          <Route path="/login"    element={<Login />} />
+          {/* Pages publiques */}
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-<Route path="/" element={<Home />} />
-          {/* Pages propriétaire — connexion obligatoire */}
+
+          {/* Pages propriétaire */}
           <Route element={<PrivateRoute allowedRoles={['proprietaire', 'admin']} />}>
-            <Route path="/dashboard"   element={<Dashboard />} />
-            <Route path="/biens"       element={<Biens />} />
-            <Route path="/locataires"  element={<Locataires />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/biens" element={<Biens />} />
+            <Route path="/locataires" element={<Locataires />} />
             <Route path="/contrats" element={<Contrats />} />
-            <Route path="/loyers"      element={<Loyers />} />
+            <Route path="/loyers" element={<Loyers />} />
             <Route path="/maintenance" element={<Maintenance />} />
-            <Route path="/documents"   element={<Documents />} />
+            <Route path="/documents" element={<Documents />} />
           </Route>
 
-          {/* Espace locataire — connexion obligatoire */}
+          {/* Espace locataire */}
           <Route element={<PrivateRoute allowedRoles={['locataire']} />}>
             <Route path="/espace-locataire" element={<EspaceLocataire />} />
           </Route>
 
-          {/* Redirection par défaut */}
-          <Route path="/"  element={<Navigate to="/login" replace />} />
-          <Route path="*"  element={<Navigate to="/login" replace />} />
-
+          {/* 404 */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
