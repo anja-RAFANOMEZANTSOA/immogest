@@ -20,6 +20,7 @@ app.use('/api/locataires',  require('./routes/locataireRoutes'))
 app.use('/api/contrats',    require('./routes/contratRoutes'))
 app.use('/api/paiements',   require('./routes/paiementRoutes'))
 app.use('/api/maintenance', require('./routes/maintenanceRoutes'))
+app.use('/api/notification', require('./routes/notificationRoutes'))
 app.use('/api/documents',   require('./routes/documentRoutes'))
 
 // ── Route de test ─────────────────────────────────────────────
