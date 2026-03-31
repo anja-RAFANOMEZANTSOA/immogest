@@ -96,3 +96,221 @@
 .topbar-avatar:hover {
   box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
 }
+/* ── Notifications ─────────────────────────────────── */
+.topbar-notif-wrapper,
+.topbar-profil-wrapper {
+  position: relative;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  pointer-events: none;
+}
+
+.notif-dropdown,
+.profil-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 1000;
+  animation: fadeIn .15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.notif-dropdown { width: 340px; }
+
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px 10px;
+  font-weight: 600;
+  font-size: 13px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.notif-count { color: #6b7280; font-weight: 400; }
+
+.notif-tout-lire {
+  font-size: 11px;
+  color: #3b82f6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.notif-tout-lire:hover { text-decoration: underline; }
+
+.notif-list {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.notif-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 16px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background .15s;
+  border-bottom: 1px solid #f9fafb;
+  position: relative;
+}
+.notif-item:hover { background: #f9fafb; }
+.notif-item.non-lue { background: #eff6ff; }
+.notif-item.non-lue:hover { background: #dbeafe; }
+
+.notif-icone {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-titre {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.notif-message {
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notif-date {
+  font-size: 10px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.notif-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+/* ── Profil dropdown ───────────────────────────────── */
+.profil-dropdown { width: 240px; }
+
+.profil-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.profil-avatar-lg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profil-nom {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.profil-email {
+  display: block;
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.profil-role {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 10px;
+  background: #eff6ff;
+  color: #3b82f6;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.profil-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 0 16px;
+}
+
+.profil-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #ef4444;
+  border-radius: 0 0 12px 12px;
+  transition: background .15s;
+}
+.profil-logout:hover { background: #fef2f2; }
