@@ -100,15 +100,16 @@ export default function Login() {
           </div>
         </div>
 
+        {/* ✅ TÉMOIGNAGE MODIFIÉ — Marc Rakoto supprimé */}
         <div className="auth-testimonial">
           <p className="auth-testimonial-text">
-            "ImmoGest a transformé la gestion de nos 50 appartements. Un outil indispensable !"
+            "En tant que locataire, j'accède facilement à mes quittances et mes contrats. Très pratique !"
           </p>
           <div className="auth-testimonial-author">
-            <div className="auth-testimonial-avatar">MR</div>
+            <div className="auth-testimonial-avatar">NR</div>
             <div>
-              <div className="auth-testimonial-name">Marc Rakoto</div>
-              <div className="auth-testimonial-role">Propriétaire, Antananarivo</div>
+              <div className="auth-testimonial-name">Nirina Rabe</div>
+              <div className="auth-testimonial-role">Locataire, Antananarivo</div>
             </div>
           </div>
         </div>
@@ -215,10 +216,23 @@ export default function Login() {
             Créer un compte propriétaire
           </Link>
 
-          <p className="auth-bottom-text">
-            Vous êtes locataire ?{' '}
-            <Link to="/login" className="auth-link">Accès espace locataire →</Link>
-          </p>
+          {/* ✅ ESPACE LOCATAIRE CORRIGÉ — avec explication claire */}
+          <div style={{
+            marginTop: 16,
+            padding: '14px 18px',
+            background: '#F0FDF4',
+            border: '1px solid #BBF7D0',
+            borderRadius: 10,
+            textAlign: 'center'
+          }}>
+            <p style={{ fontSize: 13, color: '#374151', margin: '0 0 4px' }}>
+              🏠 Vous êtes locataire ?
+            </p>
+            <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 8px' }}>
+              Connectez-vous avec votre email et mot de passe fournis par votre propriétaire.
+              Vous serez redirigé automatiquement vers votre espace.
+            </p>
+          </div>
 
           <div className="auth-secure-badge">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5">
