@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
 import './Home.css'
 
 const LogoIcon = ({ size = 36 }) => (
@@ -33,17 +31,6 @@ const testimonials = [
 ]
 
 export default function Home() {
-  const navigate = useNavigate()
-  const { user, loading } = useAuth()
-
-  useEffect(() => {
-    if (!loading && user) {
-      navigate('/dashboard')
-    }
-  }, [user, loading, navigate])
-
-  if (loading) return null
-
   return (
     <div className="home-page">
 
