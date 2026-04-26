@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const auth = require('../middleware/authMiddleware')
+const { protect } = require('../middleware/authMiddleware')
 const db = require('../config/db')
 
-router.get('/', auth, async (req, res) => {
+router.get('/', protect, async (req, res) => {
   try {
     const userId = req.user.id
     const notifications = []
