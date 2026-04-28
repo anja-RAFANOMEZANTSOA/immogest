@@ -3,6 +3,20 @@ import { useNavigate, Link } from 'react-router-dom'
 import { authAPI } from '../services/api'
 import './Auth.css'
 
+const LogoIcon = ({ size = 32 }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="32" height="32" rx="8" fill="url(#logoGradReg)"/>
+    <path d="M16 6L7 13V26H13V20H19V26H25V13L16 6Z" fill="white" fillOpacity="0.95"/>
+    <path d="M13 20H19V26H13V20Z" fill="white" fillOpacity="0.5"/>
+    <defs>
+      <linearGradient id="logoGradReg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#8B4513"/>
+        <stop offset="100%" stopColor="#C9942A"/>
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
 export default function Register() {
   const navigate = useNavigate()
 
@@ -40,7 +54,6 @@ export default function Register() {
       setErrors(validationErrors)
       return
     }
-
     setLoading(true)
     try {
       await authAPI.register({
@@ -62,25 +75,31 @@ export default function Register() {
     }
   }
 
+  const inputStyle = {
+    borderColor: '#E8D5BF',
+    outline: 'none',
+  }
+
   return (
     <div className="auth-page">
 
       {/* Panneau gauche */}
       <div className="auth-left">
+        <div className="auth-grid-bg" />
         <div className="auth-brand">
-          <div className="auth-brand-icon">🏢</div>
+          <LogoIcon size={40} />
           <span className="auth-brand-name">ImmoGest</span>
         </div>
-        <h2 className="auth-left-title">Rejoignez ImmoGest</h2>
+        <h2 className="auth-left-title">Rejoignez <span>ImmoGest</span></h2>
         <p className="auth-left-sub">
           Créez votre compte propriétaire et commencez à gérer
           vos biens dès aujourd'hui.
         </p>
         <ul className="auth-features">
-          <li>Gratuit et sans engagement</li>
-          <li>Configuration en moins de 5 minutes</li>
-          <li>Données sécurisées et chiffrées</li>
-          <li>Interface simple et moderne</li>
+          <li><span className="auth-feature-check">✓</span>Gratuit et sans engagement</li>
+          <li><span className="auth-feature-check">✓</span>Configuration en moins de 5 minutes</li>
+          <li><span className="auth-feature-check">✓</span>Données sécurisées et chiffrées</li>
+          <li><span className="auth-feature-check">✓</span>Interface simple et moderne</li>
         </ul>
       </div>
 
@@ -89,7 +108,7 @@ export default function Register() {
         <div className="auth-form-wrap">
 
           <div className="auth-logo-row">
-            <div className="auth-logo-box">🏢</div>
+            <LogoIcon size={36} />
             <span className="auth-logo-text">ImmoGest</span>
           </div>
 
@@ -113,14 +132,12 @@ export default function Register() {
                 <input
                   type="text"
                   name="prenom"
-                  className={`form-control ${errors.prenom ? 'error' : ''}`}
-                  placeholder="Jean"
+                  className={`form-control auth-input ${errors.prenom ? 'error' : ''}`}
+                  placeholder="Votre prénom"
                   value={form.prenom}
                   onChange={handleChange}
                 />
-                {errors.prenom && (
-                  <span className="form-error">{errors.prenom}</span>
-                )}
+                {errors.prenom && <span className="form-error">{errors.prenom}</span>}
               </div>
               <div className="form-group">
                 <label className="form-label">
@@ -129,14 +146,12 @@ export default function Register() {
                 <input
                   type="text"
                   name="nom"
-                  className={`form-control ${errors.nom ? 'error' : ''}`}
-                  placeholder="Dupont"
+                  className={`form-control auth-input ${errors.nom ? 'error' : ''}`}
+                  placeholder="Votre nom"
                   value={form.nom}
                   onChange={handleChange}
                 />
-                {errors.nom && (
-                  <span className="form-error">{errors.nom}</span>
-                )}
+                {errors.nom && <span className="form-error">{errors.nom}</span>}
               </div>
             </div>
 
@@ -147,14 +162,12 @@ export default function Register() {
               <input
                 type="email"
                 name="email"
-                className={`form-control ${errors.email ? 'error' : ''}`}
+                className={`form-control auth-input ${errors.email ? 'error' : ''}`}
                 placeholder="votre@email.com"
                 value={form.email}
                 onChange={handleChange}
               />
-              {errors.email && (
-                <span className="form-error">{errors.email}</span>
-              )}
+              {errors.email && <span className="form-error">{errors.email}</span>}
             </div>
 
             <div className="form-group">
@@ -162,7 +175,7 @@ export default function Register() {
               <input
                 type="tel"
                 name="telephone"
-                className="form-control"
+                className="form-control auth-input"
                 placeholder="+261 34 00 000 00"
                 value={form.telephone}
                 onChange={handleChange}
@@ -176,14 +189,12 @@ export default function Register() {
               <input
                 type="password"
                 name="mot_de_passe"
-                className={`form-control ${errors.mot_de_passe ? 'error' : ''}`}
+                className={`form-control auth-input ${errors.mot_de_passe ? 'error' : ''}`}
                 placeholder="Au moins 6 caractères"
                 value={form.mot_de_passe}
                 onChange={handleChange}
               />
-              {errors.mot_de_passe && (
-                <span className="form-error">{errors.mot_de_passe}</span>
-              )}
+              {errors.mot_de_passe && <span className="form-error">{errors.mot_de_passe}</span>}
             </div>
 
             <div className="form-group">
@@ -193,14 +204,12 @@ export default function Register() {
               <input
                 type="password"
                 name="confirm"
-                className={`form-control ${errors.confirm ? 'error' : ''}`}
+                className={`form-control auth-input ${errors.confirm ? 'error' : ''}`}
                 placeholder="Répétez le mot de passe"
                 value={form.confirm}
                 onChange={handleChange}
               />
-              {errors.confirm && (
-                <span className="form-error">{errors.confirm}</span>
-              )}
+              {errors.confirm && <span className="form-error">{errors.confirm}</span>}
             </div>
 
             <button
@@ -208,7 +217,11 @@ export default function Register() {
               className="btn btn-primary auth-submit-btn"
               disabled={loading}
             >
-              {loading ? 'Création...' : 'Créer mon compte'}
+              {loading ? (
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                  <span className="auth-spinner" /> Création en cours...
+                </span>
+              ) : 'Créer mon compte'}
             </button>
 
           </form>
