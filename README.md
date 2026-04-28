@@ -14,7 +14,7 @@ ImmoGest est une plateforme web de gestion immobilière permettant aux propriét
 - ✅ Gestion des biens immobiliers (CRUD)
 - ✅ Gestion des locataires
 - ✅ Gestion des contrats de bail
-- ✅ Suivi des paiements de loyers
+- ✅ Suivi des paiements de loyers(PDF)
 - ✅ Demandes de maintenance
 - ✅ Espace locataire dédié
 - ✅ Documents (baux, quittances)
