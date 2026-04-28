@@ -1,351 +1,211 @@
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  height: 58px;
-  background: #FFFDF9;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(61,31,14,0.06);
-  z-index: 10;
+import { useState, useEffect, useRef } from 'react'
+import { Bell, CreditCard, Wrench, FileText, CheckCircle, LogOut } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import './Topbar.css'
+
+const API = import.meta.env.VITE_API_URL || 'https://immogest-backend.onrender.com'
+
+const iconeParType = {
+  loyer_retard:       <CreditCard size={14} />,
+  maintenance:        <Wrench size={14} />,
+  contrat_expiration: <FileText size={14} />,
+  paiement_recu:      <CheckCircle size={14} />,
 }
 
-.topbar-left {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
+const couleurParType = {
+  loyer_retard:       '#ef4444',
+  maintenance:        '#f59e0b',
+  contrat_expiration: '#8b5cf6',
+  paiement_recu:      '#10b981',
 }
 
-.topbar-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
+export default function Topbar({ title, subtitle, actions }) {
+  const { user, token, logout } = useAuth()
+  const navigate = useNavigate()
 
-.topbar-subtitle {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  font-family: 'Inter', sans-serif;
-}
+  const [notifications, setNotifications] = useState([])
+  const [showNotifs, setShowNotifs]       = useState(false)
+  const [showProfil, setShowProfil]       = useState(false)
+  const [lues, setLues]                   = useState(new Set())
 
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  const notifRef  = useRef(null)
+  const profilRef = useRef(null)
 
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  const initials = user
+    ? `${user.prenom?.[0] ?? ''}${user.nom?.[0] ?? ''}`.toUpperCase()
+    : '?'
 
-.topbar-divider {
-  width: 1px;
-  height: 22px;
-  background: var(--border);
-  margin: 0 4px;
-}
+  // Charger les notifications
+  useEffect(() => {
+    if (!token) return
+    const charger = async () => {
+      try {
+        const res = await fetch(`${API}/api/notifications`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setNotifications(data)
+        }
+      } catch (e) {
+        console.error('Erreur notifications:', e)
+      }
+    }
+    charger()
+    const interval = setInterval(charger, 60000)
+    return () => clearInterval(interval)
+  }, [token])
 
-.topbar-icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: var(--bg-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  transition: var(--transition-fast);
-  position: relative;
-  box-shadow: var(--shadow-xs);
-}
+  // Fermer les dropdowns en cliquant ailleurs
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (notifRef.current  && !notifRef.current.contains(e.target))  setShowNotifs(false)
+      if (profilRef.current && !profilRef.current.contains(e.target)) setShowProfil(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
-.topbar-icon-btn:hover {
-  background: var(--bg-subtle);
-  color: var(--accent);
-  border-color: var(--accent-border);
-}
+  const nonLues = notifications.filter(n => !lues.has(n.id)).length
 
-.topbar-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8B4513, #C9942A);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  border: 2px solid var(--accent-light);
-  box-shadow: 0 0 0 2px rgba(139,69,19,0.15);
-  transition: var(--transition-fast);
-}
+  const handleOuvrirNotifs = () => {
+    setShowNotifs(v => !v)
+    setShowProfil(false)
+  }
 
-.topbar-avatar:hover {
-  box-shadow: 0 0 0 3px rgba(139,69,19,0.25);
-}
+  const handleOuvrirProfil = () => {
+    setShowProfil(v => !v)
+    setShowNotifs(false)
+  }
 
-/* ── Notifications ─────────────────────── */
-.topbar-notif-wrapper,
-.topbar-profil-wrapper {
-  position: relative;
-}
+  const marquerToutLu = () => {
+    setLues(new Set(notifications.map(n => n.id)))
+  }
 
-.notif-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #C0392B;
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  min-width: 16px;
-  height: 16px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 3px;
-  pointer-events: none;
-}
+  const handleNotifClick = (notif) => {
+    setLues(prev => new Set([...prev, notif.id]))
+    setShowNotifs(false)
+    navigate(notif.lien)
+  }
 
-.notif-dropdown,
-.profil-dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  background: #FFFDF9;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: 0 8px 32px rgba(61,31,14,0.12);
-  z-index: 1000;
-  animation: fadeIn .15s ease;
-}
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+  const formaterDate = (date) => {
+    const d = new Date(date)
+    const now = new Date()
+    const diff = Math.floor((now - d) / 60000)
+    if (diff < 1)    return "à l'instant"
+    if (diff < 60)   return `il y a ${diff} min`
+    if (diff < 1440) return `il y a ${Math.floor(diff / 60)}h`
+    return d.toLocaleDateString('fr-FR')
+  }
 
-.notif-dropdown { width: 340px; }
+  return (
+    <header className="topbar">
+      <div className="topbar-left">
+        <span className="topbar-title">{title}</span>
+        {subtitle && <span className="topbar-subtitle">{subtitle}</span>}
+      </div>
 
-.notif-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px 10px;
-  font-weight: 600;
-  font-size: 13px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-primary);
-}
+      <div className="topbar-right">
+        {actions && (
+          <>
+            <div className="topbar-actions">{actions}</div>
+            <div className="topbar-divider" />
+          </>
+        )}
 
-.notif-count { color: var(--text-muted); font-weight: 400; }
+        {/* Cloche notifications */}
+        <div className="topbar-notif-wrapper" ref={notifRef}>
+          <button
+            className="topbar-icon-btn"
+            title="Notifications"
+            onClick={handleOuvrirNotifs}
+          >
+            <Bell size={16} />
+            {nonLues > 0 && (
+              <span className="notif-badge">{nonLues > 9 ? '9+' : nonLues}</span>
+            )}
+          </button>
 
-.notif-tout-lire {
-  font-size: 11px;
-  color: #8B4513;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-weight: 600;
-}
-.notif-tout-lire:hover { text-decoration: underline; }
+          {showNotifs && (
+            <div className="notif-dropdown">
+              <div className="notif-header">
+                <span>Notifications {nonLues > 0 && <span className="notif-count">({nonLues})</span>}</span>
+                {nonLues > 0 && (
+                  <button className="notif-tout-lire" onClick={marquerToutLu}>
+                    Tout marquer lu
+                  </button>
+                )}
+              </div>
 
-.notif-list {
-  max-height: 360px;
-  overflow-y: auto;
-}
+              <div className="notif-list">
+                {notifications.length === 0 ? (
+                  <div className="notif-empty">
+                    <CheckCircle size={32} color="#10b981" />
+                    <p>Tout est à jour !</p>
+                  </div>
+                ) : (
+                  notifications.map(notif => (
+                    <div
+                      key={notif.id}
+                      className={`notif-item ${lues.has(notif.id) ? 'lue' : 'non-lue'}`}
+                      onClick={() => handleNotifClick(notif)}
+                    >
+                      <span
+                        className="notif-icone"
+                        style={{ color: couleurParType[notif.type] }}
+                      >
+                        {iconeParType[notif.type]}
+                      </span>
+                      <div className="notif-content">
+                        <span className="notif-titre">{notif.titre}</span>
+                        <span className="notif-message">{notif.message}</span>
+                        <span className="notif-date">{formaterDate(notif.date)}</span>
+                      </div>
+                      {!lues.has(notif.id) && <span className="notif-dot" />}
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
-.notif-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 32px 16px;
-  color: var(--text-muted);
-  font-size: 13px;
-}
+        {/* Avatar + dropdown profil */}
+        <div className="topbar-profil-wrapper" ref={profilRef}>
+          <div
+            className="topbar-avatar"
+            title={`${user?.prenom} ${user?.nom}`}
+            onClick={handleOuvrirProfil}
+          >
+            {initials}
+          </div>
 
-.notif-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background .15s;
-  border-bottom: 1px solid var(--bg-subtle);
-  position: relative;
-}
-.notif-item:hover { background: var(--bg-subtle); }
-.notif-item.non-lue { background: var(--accent-light); }
-.notif-item.non-lue:hover { background: #F5E6D0; }
+          {showProfil && (
+            <div className="profil-dropdown">
+              <div className="profil-header">
+                <div className="profil-avatar-lg">{initials}</div>
+                <div>
+                  <span className="profil-nom">{user?.prenom} {user?.nom}</span>
+                  <span className="profil-email">{user?.email}</span>
+                  <span className="profil-role">{user?.role}</span>
+                </div>
+              </div>
+              <div className="profil-divider" />
+              <button className="profil-logout" onClick={handleLogout}>
+                <LogOut size={13} />
+                Déconnexion
+              </button>
+            </div>
+          )}
+        </div>
 
-.notif-icone {
-  margin-top: 2px;
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: var(--bg-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notif-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  min-width: 0;
-}
-
-.notif-titre {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.notif-message {
-  font-size: 11px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.notif-date {
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.notif-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #C9942A;
-  flex-shrink: 0;
-  margin-top: 5px;
-}
-
-/* ── Profil dropdown ───────────────────── */
-.profil-dropdown { width: 240px; }
-
-.profil-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-}
-
-.profil-avatar-lg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8B4513, #C9942A);
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.profil-nom {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.profil-email {
-  display: block;
-  font-size: 11px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 150px;
-}
-
-.profil-role {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 10px;
-  background: var(--accent-light);
-  color: #8B4513;
-  padding: 1px 8px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-transform: capitalize;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.profil-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0 16px;
-}
-
-.profil-logout {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 12px 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #C0392B;
-  border-radius: 0 0 14px 14px;
-  transition: background .15s;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 500;
-}
-.profil-logout:hover { background: var(--danger-bg); }
-
-/* ── Mobile menu btn ───────────────────── */
-.mobile-menu-btn {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg-white);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: var(--transition-fast);
-  margin-right: 8px;
-}
-
-.mobile-menu-btn:hover {
-  background: var(--bg-subtle);
-  color: var(--accent);
-}
-
-@media (max-width: 1024px) {
-  .mobile-menu-btn { display: flex; }
-  .topbar { padding: 0 16px; }
+      </div>
+    </header>
+  )
 }
