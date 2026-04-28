@@ -6,9 +6,7 @@ let pool;
 if (process.env.MYSQL_URL) {
   pool = mysql.createPool({
     uri: process.env.MYSQL_URL,
-    ssl: {
-      rejectUnauthorized: false
-    },
+    ssl: { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -20,6 +18,7 @@ if (process.env.MYSQL_URL) {
     user:     process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    ssl:      { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -30,7 +29,7 @@ pool.getConnection((err, connection) => {
   if (err) {
     console.error('Erreur connexion MySQL :', err.message);
   } else {
-    console.log('MySQL connecté avec succès');
+    console.log('MySQL connecté avec succès ✅');
     connection.release();
   }
 });
