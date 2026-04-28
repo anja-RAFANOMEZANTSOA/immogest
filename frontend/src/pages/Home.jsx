@@ -8,18 +8,18 @@ const LogoIcon = ({ size = 36 }) => (
     <path d="M15 22H21V30H15V22Z" fill="white" fillOpacity="0.5"/>
     <defs>
       <linearGradient id="hLogo" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#2563EB"/>
-        <stop offset="100%" stopColor="#1E40AF"/>
+        <stop offset="0%" stopColor="#8B4513"/>
+        <stop offset="100%" stopColor="#C9942A"/>
       </linearGradient>
     </defs>
   </svg>
 )
 
 const features = [
-  { icon: '🏠', color: '#EFF6FF', title: 'Gestion des biens', desc: 'Centralisez tous vos biens immobiliers. Ajoutez, modifiez et suivez leur statut en temps réel.' },
+  { icon: '🏠', color: '#FDF3E9', title: 'Gestion des biens', desc: 'Centralisez tous vos biens immobiliers. Ajoutez, modifiez et suivez leur statut en temps réel.' },
   { icon: '👥', color: '#F0FDF4', title: 'Gestion des locataires', desc: 'Gérez vos locataires facilement. Accès sécurisé à leur espace personnel dédié.' },
   { icon: '📄', color: '#FFF7ED', title: 'Contrats de bail', desc: 'Créez et gérez vos contrats de bail en ligne. Suivi des échéances automatique.' },
-  { icon: '💰', color: '#FFF1F2', title: 'Suivi des loyers', desc: 'Enregistrez les paiements, générez des quittances PDF et suivez les impayés.' },
+  { icon: '💰', color: '#FEF9E7', title: 'Suivi des loyers', desc: 'Enregistrez les paiements, générez des quittances PDF et suivez les impayés.' },
   { icon: '🔧', color: '#F5F3FF', title: 'Maintenance', desc: 'Recevez et gérez les demandes de maintenance en temps réel depuis votre tableau de bord.' },
   { icon: '📊', color: '#ECFDF5', title: 'Tableau de bord', desc: "Visualisez vos revenus, taux d'occupation et performances financières en un coup d'œil." },
 ]
@@ -72,20 +72,22 @@ export default function Home() {
           <Link to="/register" className="btn-hero-primary">Commencer gratuitement →</Link>
           <Link to="/login" className="btn-hero-secondary">Se connecter</Link>
         </div>
+
+        {/* Stats — sans chiffres fictifs */}
         <div className="home-hero-stats">
           <div className="home-hero-stat">
-            <span className="home-hero-stat-value">500+</span>
-            <span className="home-hero-stat-label">Biens gérés</span>
+            <span className="home-hero-stat-value">Rapide</span>
+            <span className="home-hero-stat-label">Prise en main</span>
           </div>
           <div className="home-hero-divider" />
           <div className="home-hero-stat">
-            <span className="home-hero-stat-value">200+</span>
-            <span className="home-hero-stat-label">Propriétaires</span>
+            <span className="home-hero-stat-value">Simple</span>
+            <span className="home-hero-stat-label">Interface intuitive</span>
           </div>
           <div className="home-hero-divider" />
           <div className="home-hero-stat">
-            <span className="home-hero-stat-value">98%</span>
-            <span className="home-hero-stat-label">Satisfaction</span>
+            <span className="home-hero-stat-value">Sécurisé</span>
+            <span className="home-hero-stat-label">Données protégées</span>
           </div>
           <div className="home-hero-divider" />
           <div className="home-hero-stat">
@@ -168,7 +170,7 @@ export default function Home() {
         <div className="home-cta-box">
           <h2 className="home-cta-title">Prêt à simplifier votre gestion immobilière ?</h2>
           <p className="home-cta-sub">
-            Rejoignez des centaines de propriétaires qui font confiance à ImmoGest. Démarrez gratuitement dès aujourd'hui.
+            Rejoignez des propriétaires qui font confiance à ImmoGest. Démarrez gratuitement dès aujourd'hui.
           </p>
           <div className="home-cta-actions">
             <Link to="/register" className="btn-hero-primary">Créer mon compte gratuit →</Link>
