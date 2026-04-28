@@ -11,8 +11,8 @@ const LogoIcon = ({ size = 32 }) => (
     <path d="M13 20H19V26H13V20Z" fill="white" fillOpacity="0.5"/>
     <defs>
       <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#2563EB"/>
-        <stop offset="100%" stopColor="#6366F1"/>
+        <stop offset="0%" stopColor="#8B4513"/>
+        <stop offset="100%" stopColor="#C9942A"/>
       </linearGradient>
     </defs>
   </svg>
@@ -87,8 +87,8 @@ export default function Login() {
 
         <div className="auth-stats">
           <div className="auth-stat">
-            <span className="auth-stat-value">500+</span>
-            <span className="auth-stat-label">Biens gérés</span>
+            <span className="auth-stat-value">Rapide</span>
+            <span className="auth-stat-label">Prise en main</span>
           </div>
           <div className="auth-stat">
             <span className="auth-stat-value">98%</span>
@@ -100,7 +100,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* ✅ TÉMOIGNAGE MODIFIÉ — Marc Rakoto supprimé */}
         <div className="auth-testimonial">
           <p className="auth-testimonial-text">
             "En tant que locataire, j'accède facilement à mes quittances et mes contrats. Très pratique !"
@@ -143,7 +142,7 @@ export default function Login() {
               <label className="form-label" htmlFor="email">Adresse email</label>
               <div className="auth-input-wrap">
                 <span className="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8896A" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
                   </svg>
@@ -166,13 +165,13 @@ export default function Login() {
                 <label className="form-label" htmlFor="mot_de_passe" style={{ margin: 0 }}>
                   Mot de passe
                 </label>
-                <span style={{ fontSize: 12, color: '#2563EB', cursor: 'pointer', fontWeight: 500 }}>
+                <span style={{ fontSize: 12, color: '#8B4513', cursor: 'pointer', fontWeight: 500 }}>
                   Mot de passe oublié ?
                 </span>
               </div>
               <div className="auth-input-wrap">
                 <span className="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8896A" strokeWidth="2">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                   </svg>
@@ -216,26 +215,25 @@ export default function Login() {
             Créer un compte propriétaire
           </Link>
 
-          {/* ✅ ESPACE LOCATAIRE CORRIGÉ — avec explication claire */}
           <div style={{
             marginTop: 16,
             padding: '14px 18px',
-            background: '#F0FDF4',
-            border: '1px solid #BBF7D0',
+            background: '#FDF3E9',
+            border: '1px solid #E8C9A8',
             borderRadius: 10,
             textAlign: 'center'
           }}>
-            <p style={{ fontSize: 13, color: '#374151', margin: '0 0 4px' }}>
+            <p style={{ fontSize: 13, color: '#3D1F0E', margin: '0 0 4px' }}>
               🏠 Vous êtes locataire ?
             </p>
-            <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 8px' }}>
+            <p style={{ fontSize: 12, color: '#6B4A35', margin: '0 0 8px' }}>
               Connectez-vous avec votre email et mot de passe fournis par votre propriétaire.
               Vous serez redirigé automatiquement vers votre espace.
             </p>
           </div>
 
           <div className="auth-secure-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2D7A4F" strokeWidth="2.5">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             Connexion sécurisée SSL 256-bit
