@@ -1,34 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 
-// Crée le contexte — comme une variable globale accessible partout
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
+  const [user,    setUser]    = useState({ id: 1, nom: 'RAFANOMEZANTSOA', prenom: 'Anja', email: 'demo@immogest.com', role: 'proprietaire' })
+  const [token,   setToken]   = useState('demo-token')
+  const [loading, setLoading] = useState(false)
 
-  // user = l'utilisateur connecté (null si personne)
-  const [user,    setUser]    = useState(null)
-  const [token,   setToken]   = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  // Au démarrage → vérifie si une session existe déjà
-  useEffect(() => {
-    const savedToken = localStorage.getItem('immogest_token')
-    const savedUser  = localStorage.getItem('immogest_user')
-
-    if (savedToken && savedUser) {
-      try {
-        setToken(savedToken)
-        setUser(JSON.parse(savedUser))
-      } catch {
-        // Si données corrompues → on nettoie
-        localStorage.removeItem('immogest_token')
-        localStorage.removeItem('immogest_user')
-      }
-    }
-    setLoading(false)
-  }, [])
-
-  // Fonction appelée quand l'utilisateur se connecte
   const login = (userData, userToken) => {
     setUser(userData)
     setToken(userToken)
@@ -36,7 +14,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem('immogest_user',  JSON.stringify(userData))
   }
 
-  // Fonction appelée quand l'utilisateur se déconnecte
   const logout = () => {
     setUser(null)
     setToken(null)
@@ -51,7 +28,6 @@ export function AuthProvider({ children }) {
   )
 }
 
-// Hook personnalisé — permet d'utiliser useAuth() dans n'importe quelle page
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
