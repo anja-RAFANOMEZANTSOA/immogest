@@ -1,16 +1,16 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+const mysql = require('mysql2')
+require('dotenv').config()
 
-let pool;
+let pool
 
 if (process.env.MYSQL_URL) {
   pool = mysql.createPool({
-    uri: process.env.MYSQL_URL,
+    uri: process.env.MYSQL_URL.replace('?ssl-mode=REQUIRED', ''),
     ssl: { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-  });
+  })
 } else {
   pool = mysql.createPool({
     host:     process.env.DB_HOST,
@@ -18,20 +18,19 @@ if (process.env.MYSQL_URL) {
     user:     process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl:      { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-  });
+  })
 }
 
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error('Erreur connexion MySQL :', err.message);
+    console.error('Erreur connexion MySQL :', err.message)
   } else {
-    console.log('MySQL connecté avec succès ✅');
-    connection.release();
+    console.log('MySQL connecté avec succès ✅')
+    connection.release()
   }
-});
+})
 
-module.exports = pool.promise();
+module.exports = pool.promise()
