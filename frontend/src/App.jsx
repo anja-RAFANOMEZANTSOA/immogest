@@ -25,7 +25,17 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Pages propriétaire */}
+          {/* ── ROUTES DEMO (sans connexion) ── */}
+          <Route path="/demo/dashboard" element={<Dashboard />} />
+          <Route path="/demo/biens" element={<Biens />} />
+          <Route path="/demo/locataires" element={<Locataires />} />
+          <Route path="/demo/contrats" element={<Contrats />} />
+          <Route path="/demo/loyers" element={<Loyers />} />
+          <Route path="/demo/maintenance" element={<Maintenance />} />
+          <Route path="/demo/documents" element={<Documents />} />
+          <Route path="/demo/espace-locataire" element={<EspaceLocataire />} />
+
+          {/* Pages propriétaire protégées */}
           <Route element={<PrivateRoute allowedRoles={['proprietaire', 'admin']} />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/biens" element={<Biens />} />
